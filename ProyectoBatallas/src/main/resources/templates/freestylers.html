@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  	<title>Freestylers</title>
+  
+ 
+
+
+</head>
+
+<body id="page-top"><!-- top -->
+        <!-- top -->
+        <!-- top -->
+ 		<div th:insert="top::top"></div>
+<div class="container">
+        <!-- top -->
+        <!-- top -->
+        <!-- top -->
+ 	 
+	<div class="m-5">
+	<nav aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item">
+	    	<a href="/">
+                 <i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
+            </a>
+        </li>
+	    <li class="breadcrumb-item">Freestylers</li>
+	  </ol>
+	</nav>
+	</div>
+
+  <!-- lista de jueces -->
+<table class="table  table-hover">
+    <thead class="table-dark bg-info text-white  ">
+        <tr>
+            <th scope="col"> Id </th>
+            <th scope="col"> nombre </th>
+            <th scope="col"> Batalla </th>
+            <th scope="col"> Id Batalla</th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr th:if="${freestylers.empty}">
+            <td colspan="2"> No hay Freestylers</td>
+        </tr>
+        <tr th:each="freestyler : ${freestylers}">
+           <td><span th:text="${freestyler.id}"> Id </span></td>
+           <td><span th:text="${freestyler.batalla.id}"> ID batalla </span></td>
+             <td >            
+             
+             </td>
+        </tr>
+    </tbody>
+</table>
+ 
+ 
+ 
+ <div class="col-2 float-right">
+        <div class="p-5">
+			<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#crearMensaje" >
+				+
+			</button>
+
+        </div>       
+      </div>
+ 
+ 
+         <!-- Añadir carpeta modal -->
+		  <div class="modal fade" id="crearMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <h4 class="modal-title" id="exampleModalLabel">Nuevo Freestyler</h4>
+		          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">×</span>
+		          </button>
+		        </div>
+		        
+                <form action="#" th:action="@{/freestylers/add}" th:object="${freestylerNuevo}"  method="post">
+			        <div class="modal-body">			        
+					  <div class="form-row">
+					    <div class="form-group  mt-4">
+					      <label for="texto">Seleccionar Batalla</label>
+					      <select th:field="*{batalla.id}"class="form-control" id="exampleFormControlSelect1">
+					      <option th:each="batalla : ${batallas}" th:value="${batalla.id}" th:text="${batalla.id}" value="">Seleccionar batalla</option>				      
+					    </select> 
+					         </div>
+	                  </div>	 			   
+			        </div>
+			        
+			        <div class="modal-footer">
+		                <input type="submit" value="Añadir" class="btn btn-primary float-right">
+		                <button data-dismiss="modal" class="btn btn-outline-danger float-right mr-2">Cancelar</button>
+			        </div>
+                </form>
+		      </div>
+		      
+		    </div>
+		  </div>
+		  <!-- Fin MODAL ADD free-->
+		  
+		  <!--delete modal-->
+					<div class="modal fade" th:id="modal-delete+${freestyler.id}">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Borrar</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">×</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text"><strong>¿Seguro que deseas borrar a
+											<span th:text="${freestyler.nombre}"></span>?</strong></p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">
+										Cancelar
+									</button>
+									<a th:href="@{/freestylers/delete/{id}(id=${freestyler.id})}">
+										<span class="btn btn-danger btn-sm" value="delete">Borrar</span></a>
+
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--end delete modal-->
+ 
+ 
+</div>
+</body>
+
+
+
+		<!-- Añadir carpeta modal -->
+		<div class="modal fade" id="crearMensaje" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="exampleModalLabel">Nuevo Freestyler</h4>
+						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+
+
+
+
+					<form action="#" th:action="@{/freestylers/add}" th:object="${freestylerNuevo}" method="post">
+						<div class="modal-body">
+							<div class="form-row">
+								<div class="form-group  mt-4">
+									<label for="texto">Nombre</label>
+									<input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1"
+										placeholder="Nombre" />
+
+								</div>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<input type="submit" value="Añadir" class="btn btn-primary float-right">
+							<button data-dismiss="modal"
+								class="btn btn-outline-danger float-right mr-2">Cancelar</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+
+</html>

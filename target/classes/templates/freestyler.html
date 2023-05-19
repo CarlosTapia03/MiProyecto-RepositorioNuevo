@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	  
+	<title>Freestyler</title>
+
+
+
+</head>
+
+<body id="page-top">
+	<!-- top -->
+	<!-- top -->
+	<!-- top -->
+	<div th:insert="top::top"></div>
+	<div class="container">
+
+		<!-- top -->
+		<!-- top -->
+
+		<div class="m-5">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">
+							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
+						</a>
+					</li>
+					<li class="breadcrumb-item"><a href="/freestylers">Freestylers</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Ficha de freestyler</li>
+				</ol>
+			</nav>
+		</div>
+
+
+		<!-- Header -->
+		<header class="masthead">
+
+
+			<div class="row pl-5 pr-5">
+				<div class="col-9">
+
+					<h5>Ficha de juez</h5>
+					<div class="card border border-primary" th:object="${freestyler}">
+
+						<div class="card-body row pt-4 pb-4">
+							<div class="col-7">
+								<div class="card">
+									<div class="card-header text-dark bg-light">Ficha de freestyler</div>
+									<div class="card-body">
+										<div class="mb-2">
+											<h5 th:text="*{nombre}" class="card-text mb-2">With supporting text below as
+												a natural lead-in to additional content.</h5>
+										</div>
+
+										<p><a th:href="@{/freestylers}" class="btn btn-primary mt-3">Cerrar</a></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-5">
+								<div class="card">
+									<div class="card-header text-dark bg-light">Batallas en la que esta este freestyler</div>
+									<div class="card-body">
+
+										<span th:each="batalla : ${freestyler.batallas}">
+											<p><a th:text="${batalla.id}" th:href="@{/batallas/{id}(id=${batalla.id})}"
+													class="card-text"> </a></p>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</header>
+	</div>
+</body>
+
+
+</html>

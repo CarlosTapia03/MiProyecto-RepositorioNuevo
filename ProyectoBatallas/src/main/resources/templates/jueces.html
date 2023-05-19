@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<head th:insert="librerias::librerias">
+
+<script>
+    $('#modal-delete').on('show.bs.modal', function (e) {
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        $('#modal-deleteHiddenId').val($(this).find('.btn-ok').attr('href'));
+    });
+</script>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+
+<div th:insert="top::top"></div>
+
+</header>
+
+<h1>Jueces en Spring </h1>
+
+<!-- Imprimir tabla jueces -->
+
+<table class="table table-hover">
+<thead class = "table-dark bg-info text-white">
+<tr>
+<th>Id </th>
+<th>Nombre</th>
+<th>Editar</th>
+<th sec:authorize="hasAuthority('ROLE_ADMIN')">Borrar</th>
+</tr>
+</thead>
+<tbody>
+<!-- El meolo -->
+	<tr th:if="${listaJueces.empty}">
+		<td colspan="2"> No hay jueces</td>
+	</tr>
+	<tr th:each="juez:${listaJueces}">
+	<td>
+		<a th:href="@{/jueces/{id}(id=${juez.id})}" class="btn btn-primary btn-sm">
+			<span th:text="${juez.id}"> </span>
+		</a>
+	</td>
+	<td>
+		<span th:text="${juez.nombre}"> </span>
+	</td>
+	
+	<td>
+		<a th:attr="data-target='#modal-edit'+${juez.id}" data-toggle="modal" data-target="#modal-edit" class="btn btn-primary btn-sm text-white pointer">Edit</a>
+	</td>
+	
+	<td sec:authorize="hasAuthority('ROLE_ADMIN')">
+		<a th:attr="data-target='#modal-delete'+${juez.id}" data-toggle="modal" data-target="#modal-delete" class="btn btn-primary btn-sm text-white pointer">Borrar</a>
+	</td>
+	
+	<!-- edit modal -->
+	
+	<div class="modal fade" th:id="modal-edit+${juez.id}">
+	<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" id="exampleModelLabel">Editar</h4>
+		<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">x</span>
+		</button>
+	</div>
+	<div class="modal-body">
+	<p class="error-text"> Introduce el nombre nuevo para el juez/a:
+	<strong><span th:text="${juez.nombre}"> </span></strong></p>
+	
+	<!-- formulario nombre a editar-->
+	<form action="#" th:action="@{/jueces/edit/{id}(id=${juez.id})}" th:object="${juezaEditar}" method="post">
+	 
+	 <div class="form-row">
+	 
+	 <div class="form-group mt-1">
+	 <label for="texto">Nombre</label>
+	 <input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${juez.nombre}"/>
+	 
+	 </div>
+	 
+	 </div>
+	 </div>
+	 <div class="modal-footer">
+	 <button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+	 <input type="submit" value="Editar" class="btn btn-primary float-right"/>
+	 </div>
+	
+	</form>
+	
+	</div>
+	</div>
+	</div>
+	
+	<!-- fin modal -->
+	
+	
+	<!-- delete modal -->
+	
+	<div class="modal fade" th:id="modal-delete+${juez.id}">
+	<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" id="exampleModelLabel">Eliminar</h4>
+		<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">x</span>
+		</button>
+	</div>
+	
+	<div class="modal-body">
+	<p class="error-text"> ¿Está seguro de eliminar al juez:
+	<strong><span th:text="${juez.nombre}"> </span></strong>?</p>
+	
+	 </div>
+	 <div class="modal-footer">
+	 <button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+	 <a th:href="@{/jueces/delete/{id}(id=${juez.id})}">
+	 <span class="btn btn-danger btn-sm" value="delete">Borrar</span>
+	 </a>
+	 </div>
+	
+	</div>
+	</div>
+	</div>
+	
+	<!-- fin delete modal -->
+	</tr>
+</tbody>
+</table>
+
+<div class="col-2 float right">
+
+<div class="p-5">
+<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#crearMensaje">
++</button>
+</div>
+
+<!-- create modal -->
+	
+	<div class="modal fade" th:id="crearMensaje" tabindex="1" role="dialog">
+	<div class="modal-dialog" role="document">
+	<div class="modal-content">
+	<div class="modal-header">
+		<h4 class="modal-title" id="exampleModelLabel">Crear juez</h4>
+		<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">
+		<span aria-hidden="true">x</span>
+		</button>
+	</div>
+	<div class="modal-body">
+	<p class="error-text"> Introduce el nombre nuevo para el nuevo juez/a:</p>
+	
+	<!-- formulario nombre a editar-->
+	<form action="#" th:action="@{/jueces/add/}" th:object="${juezNuevo}" method="post">
+	 
+	 <div class="form-row">
+	 
+	 <div class="form-group mt-1">
+	 <label for="texto">Nombre</label>
+	 <input type="text" th:field="*{nombre}" class="form-control" id="exampleInputEmail1" placeholder="Insertar nombre"/>
+	 
+	 </div>
+	 
+	 </div>
+	 </div>
+	 <div class="modal-footer">
+	 <button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+	 <input type="submit" value="Crear Juez" class="btn btn-primary float-right"/>
+	 </div>
+	
+	</form>
+	
+	</div>
+	</div>
+	</div>
+	
+	<!-- fin create modal -->
+
+</div>
+
+</div>
+</body>
