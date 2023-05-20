@@ -1,5 +1,7 @@
 package aplication.service.interfaces;
 
+import java.util.List;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import aplication.model.Usuario;
@@ -10,5 +12,5 @@ public interface UsuarioService extends UserDetailsService{
 	
 	public Usuario guardarUsuario(UsuarioDto registroDto);
 	
-	
+	public List<Usuario> listarUsuarios();
 }

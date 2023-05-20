@@ -13,12 +13,12 @@ import aplication.service.impl.JuezServiceImpl;
 @Controller
 public class MainController {
 	
-	@GetMapping("/")
-	String home() {
-		
-		//crearTablas();
-		return "index";
-	}
+//	@GetMapping("/")
+//	String home() {
+//		
+//		//crearTablas();
+//		return "index";
+//	}
 	
 	@Autowired
 	private BatallasRepo batallaRepo;
