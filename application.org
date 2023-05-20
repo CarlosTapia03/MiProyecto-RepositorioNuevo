@@ -72,3 +72,23 @@
 2023-05-20 19:32:59.944  INFO 31356 --- [http-nio-8095-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2023-05-20 19:32:59.945  INFO 31356 --- [http-nio-8095-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2023-05-20 19:32:59.946  INFO 31356 --- [http-nio-8095-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-20 21:10:49.990  INFO 33100 --- [main] aplication.App                           : Starting App using Java 17.0.4.1 on LAPTOP-81DHEBF4 with PID 33100 (C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes started by carlo in C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas)
+2023-05-20 21:10:49.999  INFO 33100 --- [main] aplication.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-05-20 21:10:50.819  WARN 33100 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'delegatingApplicationListener' defined in class path resource [aplication/security/SecurityConfig.class]: Cannot register bean definition [Root bean: class [aplication.security.SecurityConfig]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=delegatingApplicationListener; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [aplication/security/SecurityConfig.class]] for bean 'delegatingApplicationListener': There is already [Root bean: class [org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=delegatingApplicationListener; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class]] bound.
+2023-05-20 21:10:50.841  INFO 33100 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-05-20 21:10:50.871 ERROR 33100 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'delegatingApplicationListener', defined in class path resource [aplication/security/SecurityConfig.class], could not be registered. A bean with that name has already been defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+

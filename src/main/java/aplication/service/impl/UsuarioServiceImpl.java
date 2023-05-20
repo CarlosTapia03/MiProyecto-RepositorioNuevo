@@ -4,11 +4,13 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import aplication.model.Rol;
@@ -20,6 +22,9 @@ import aplication.service.interfaces.UsuarioService;
 @Service
 public class UsuarioServiceImpl implements UsuarioService{
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	private UsuarioRepo usuarioRepo;
 	
 	public UsuarioServiceImpl(UsuarioRepo usuarioRepo) {
@@ -33,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		Usuario usuario = new Usuario(registroDto.getNombre(), 
 				registroDto.getApellido(),
 				registroDto.getEmail(),
-				registroDto.getPassword(),
+				passwordEncoder.encode(registroDto.getPassword()),
 				Arrays.asList(new Rol("ROLE_USER")));
 		return usuarioRepo.save(usuario);
 	}
@@ -47,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 		if (usuario == null) {
 			throw new UsernameNotFoundException("Usuario o password invalidos");	
 		}
-		return new User(usuario.getEmail(), usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
+		return new User(usuario.getEmail(),usuario.getPassword(), mapearAutoridadesRoles(usuario.getRoles()));
 	}
 	
 	private Collection<? extends GrantedAuthority> mapearAutoridadesRoles(Collection<Rol> roles) {

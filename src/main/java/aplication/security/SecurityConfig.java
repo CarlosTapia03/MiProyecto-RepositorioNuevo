@@ -13,35 +13,36 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import aplication.service.interfaces.UsuarioService;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfiguration{
 
 	@Autowired
-	UsuarioService usuarioService;
-	
+	private UsuarioService usuarioServicio;
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-	
+
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
-		auth.setUserDetailsService(usuarioService);
+		auth.setUserDetailsService(usuarioServicio);
 		auth.setPasswordEncoder(passwordEncoder());
 		return auth;
 	}
-	
+
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(authenticationProvider());
 	}
-	
+
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(
 				"/registro**",
 				"/js/**",
-				"/*css/**",
+				"/css/**",
 				"/img/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
@@ -55,6 +56,6 @@ public class SecurityConfig extends WebSecurityConfiguration{
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.logoutSuccessUrl("/login?logout")
 		.permitAll();
-		
 	}
 }
+
