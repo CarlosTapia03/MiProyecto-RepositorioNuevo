@@ -1,9 +1,7 @@
 package aplication.model;
 
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,56 +14,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "usuarios", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class Usuario implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1564958006133110728L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
-	
-	@Column (name="nombre")
+	private Long id;
+
+	@Column(name = "nombre")
 	private String nombre;
-	
-	@Column(name="username", unique = true)
-	private String username;
-	
-	@Column (name="password")
+
+	@Column(name = "apellido")
+	private String apellido;
+	private String email;
 	private String password;
 	
-	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
-			name="usuario_roles",
-			joinColumns = {@JoinColumn(name="id_usuario")},
-			inverseJoinColumns = @JoinColumn(name="id_rol")
+			name = "usuarios_roles",
+			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "rol_id", referencedColumnName = "id")
 			)
-	@JsonIgnore
-	private Set<Rol> roles;
-	
-	public Usuario() {
-		roles = new HashSet<Rol>();
-	}
-	
-	public Usuario(String nombre, String usuario, String pass) {
-		this.nombre = nombre;
-		this.username = usuario;
-		this.password = pass;
-		roles = new HashSet<Rol>();
-	}
+	private Collection<Rol> roles;
 
-	
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -77,12 +61,20 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -93,11 +85,35 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Set<Rol> getRoles() {
+	public Collection<Rol> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Set<Rol> roles) {
+	public void setRoles(Collection<Rol> roles) {
 		this.roles = roles;
 	}
+
+	public Usuario(Long id, String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public Usuario(String nombre, String apellido, String email, String password, Collection<Rol> roles) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
+		this.roles = roles;
+	}
+
+	public Usuario() {
+		super();
+	}
+
 }
