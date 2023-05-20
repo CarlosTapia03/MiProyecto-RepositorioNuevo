@@ -92,3 +92,98 @@ Action:
 
 Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
 
+2023-05-20 21:26:47.156  INFO 28460 --- [main] aplication.App                           : Starting App using Java 17.0.4.1 on LAPTOP-81DHEBF4 with PID 28460 (C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes started by carlo in C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas)
+2023-05-20 21:26:47.160  INFO 28460 --- [main] aplication.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-05-20 21:26:47.693  WARN 28460 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'delegatingApplicationListener' defined in class path resource [aplication/security/SecurityConfig.class]: Cannot register bean definition [Root bean: class [aplication.security.SecurityConfig]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=delegatingApplicationListener; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [aplication/security/SecurityConfig.class]] for bean 'delegatingApplicationListener': There is already [Root bean: class [org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration]; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=delegatingApplicationListener; initMethodName=null; destroyMethodName=(inferred); defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class]] bound.
+2023-05-20 21:26:47.703  INFO 28460 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-05-20 21:26:47.732 ERROR 28460 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'delegatingApplicationListener', defined in class path resource [aplication/security/SecurityConfig.class], could not be registered. A bean with that name has already been defined in class path resource [org/springframework/security/config/annotation/web/configuration/WebSecurityConfiguration.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2023-05-20 21:30:33.146  INFO 33592 --- [main] aplication.App                           : Starting App using Java 17.0.4.1 on LAPTOP-81DHEBF4 with PID 33592 (C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes started by carlo in C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas)
+2023-05-20 21:30:33.150  INFO 33592 --- [main] aplication.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-05-20 21:30:33.729  INFO 33592 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-20 21:30:33.799  INFO 33592 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 4 JPA repository interfaces.
+2023-05-20 21:30:34.289  INFO 33592 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8095 (http)
+2023-05-20 21:30:34.301  INFO 33592 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-20 21:30:34.301  INFO 33592 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-05-20 21:30:34.437  INFO 33592 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-20 21:30:34.438  INFO 33592 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1237 ms
+2023-05-20 21:30:34.589  INFO 33592 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-20 21:30:34.737  INFO 33592 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-20 21:30:34.811  INFO 33592 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-20 21:30:34.870  INFO 33592 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-05-20 21:30:35.035  INFO 33592 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-20 21:30:35.171  INFO 33592 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2023-05-20 21:30:35.763  INFO 33592 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-20 21:30:35.772  INFO 33592 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-20 21:30:36.144  WARN 33592 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-20 21:30:36.155  WARN 33592 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'registroUsuarioController' defined in file [C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes\aplication\controller\RegistroUsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioServiceImpl': Unsatisfied dependency expressed through field 'passwordEncoder'; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig': Unsatisfied dependency expressed through field 'usuarioServicio'; nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationException: Error creating bean with name 'usuarioServiceImpl': Requested bean is currently in creation: Is there an unresolvable circular reference?
+2023-05-20 21:30:36.156  INFO 33592 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-20 21:30:36.157  INFO 33592 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-20 21:30:36.165  INFO 33592 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-20 21:30:36.166  INFO 33592 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-05-20 21:30:36.176  INFO 33592 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-05-20 21:30:36.194 ERROR 33592 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+   registroUsuarioController defined in file [C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes\aplication\controller\RegistroUsuarioController.class]
+┌─────┐
+|  usuarioServiceImpl (field private org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder aplication.service.impl.UsuarioServiceImpl.passwordEncoder)
+↑     ↓
+|  securityConfig (field private aplication.service.interfaces.UsuarioService aplication.security.SecurityConfig.usuarioServicio)
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+
+2023-05-20 21:31:34.787  INFO 26548 --- [main] aplication.App                           : Starting App using Java 17.0.4.1 on LAPTOP-81DHEBF4 with PID 26548 (C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas\target\classes started by carlo in C:\Users\carlo\OneDrive\Escritorio\ProyectoBatallas)
+2023-05-20 21:31:34.796  INFO 26548 --- [main] aplication.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-05-20 21:31:35.418  INFO 26548 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-20 21:31:35.494  INFO 26548 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 4 JPA repository interfaces.
+2023-05-20 21:31:35.973  INFO 26548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8095 (http)
+2023-05-20 21:31:35.988  INFO 26548 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-20 21:31:35.989  INFO 26548 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-05-20 21:31:36.098  INFO 26548 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-20 21:31:36.098  INFO 26548 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1244 ms
+2023-05-20 21:31:36.264  INFO 26548 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-20 21:31:36.430  INFO 26548 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-20 21:31:36.514  INFO 26548 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-20 21:31:36.579  INFO 26548 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.10.Final
+2023-05-20 21:31:36.745  INFO 26548 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-20 21:31:36.875  INFO 26548 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2023-05-20 21:31:37.471  INFO 26548 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-20 21:31:37.486  INFO 26548 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-20 21:31:37.889  WARN 26548 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-20 21:31:38.041  INFO 26548 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2a5ed225, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2a525f88, org.springframework.security.web.context.SecurityContextPersistenceFilter@33060020, org.springframework.security.web.header.HeaderWriterFilter@32e7df65, org.springframework.security.web.csrf.CsrfFilter@72c175f1, org.springframework.security.web.authentication.logout.LogoutFilter@78324e97, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@1755aee6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@a72925, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70f3bf00, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1cf4d454, org.springframework.security.web.session.SessionManagementFilter@45964b9e, org.springframework.security.web.access.ExceptionTranslationFilter@58fbfefb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6f926d01]
+2023-05-20 21:31:38.194  INFO 26548 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-05-20 21:31:38.458  INFO 26548 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8095 (http) with context path ''
+2023-05-20 21:31:38.470  INFO 26548 --- [main] aplication.App                           : Started App in 4.143 seconds (JVM running for 5.179)
+2023-05-20 21:31:41.590  INFO 26548 --- [RMI TCP Connection(2)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2023-05-20 21:31:41.604  INFO 26548 --- [RMI TCP Connection(2)-127.0.0.1] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-05-20 21:31:41.611  INFO 26548 --- [RMI TCP Connection(2)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-20 21:31:41.613  INFO 26548 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-20 21:31:41.621  INFO 26548 --- [RMI TCP Connection(2)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
