@@ -8,4 +8,7 @@ import aplication.model.Usuario;
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, Long>{
 
+	public Usuario findByEmail(String email);
+	
+	
 }
