@@ -36,6 +36,8 @@ public class MainController {
 	@Autowired
 	private BatallaServiceImpl batallaService;
 	
+	
+	
 public void crearTablas() {
 		
 		Juez j1 = new Juez("Kapo");
