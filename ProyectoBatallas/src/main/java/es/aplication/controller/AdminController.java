@@ -33,12 +33,14 @@ public class AdminController {
 
 	@Autowired
 	private AlmacenServicio servicio;
+	
+	
 
 	@GetMapping("/")
 	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "nombre", size = 5) Pageable pageable) {
 	    Page<Batalla> batallas = batallasRepo.findAll(pageable);
 
-	    return new ModelAndView("index").addObject("batallas", batallas);
+	    return new ModelAndView("/admin/index").addObject("batallas", batallas);
 	}
 
 
@@ -49,7 +51,7 @@ public class AdminController {
 	}
 
 	@PostMapping("/batallas/nuevo")
-	public ModelAndView registrarPelicula(@Validated Batalla batalla, BindingResult bindingResult) {
+	public ModelAndView registrarBatalla(@Validated Batalla batalla, BindingResult bindingResult) {
 		if (bindingResult.hasErrors() || batalla.getPortada() == null || batalla.getPortada().isEmpty()) {
 		    if (batalla.getPortada() == null || batalla.getPortada().isEmpty()) {
 		        bindingResult.rejectValue("portada", "MultipartNotEmpty");

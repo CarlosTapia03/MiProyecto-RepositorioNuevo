@@ -1,63 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+				xmlns:layout="http://www.ultraq.net.nz/thymelaf/layout"
+				layout:decorate="~{master.html}">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Votaciones de batallas</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-
-	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-
-	<div th:insert="librerias::librerias"></div>
-
-	<style>
-	
-		form .invalid-feedback {
-			display: block;
-		}
-	
-		body {
-			background-color: rgb(192, 192, 192);
-		}
-
-		.red-bull-blue {
-			color: #004B87;
-		}
-
-		.red-bull-red {
-			color: #CE0E2D;
-		}
-
-		.red-bull-bg {
-			background-color: #CE0E2D;
-		}
-
-		.red-bull-bg:hover {
-			background-color: #A00C22;
-		}
-	</style>
 </head>
 
 <body>
 
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-	<header>
-			<div th:insert="top::top"></div>
-	</header>
-
-	<div class="container">
-
-
+	<div layout:fragment="content">
 		<h1 class="mt-4 mb-4 red-bull-red">Votaciones de batallas</h1>
 
 		<h2 class="mb-4 red-bull-blue">Batallas de Red Bull</h2>
@@ -110,12 +65,16 @@
 			</thead>
 			<tbody>
 				<tr th:each="batalla : ${batallas}" th:object="${batalla}">
-					<td></td>
+					<td style="width:150px;">
+						<a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
+							<img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="img-thumbnail w-100"/>
+						</a>
+					</td>
 					<td>
 						<div th:text="*{nombre}" class="fs-5 fw-bold"></div>
 						<p th:text="*{descripcion}"></p>
 						<div>
-							<span class="badge rounded-pill bg-light text-dark me-1" th:each="ronda: ${rondas}"
+							<span class="badge rounded-pill bg-light text-dark me-1" th:each="ronda: *{rondas}"
 							 th:text="${ronda.titulo}"></span>
 						</div>
 					</td>

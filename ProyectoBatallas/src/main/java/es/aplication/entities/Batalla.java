@@ -49,7 +49,7 @@ public class Batalla {
 
 	@NotNull
 	@DateTimeFormat(iso = ISO.DATE)
-	@Column(name = "fechaBatalla")
+	@Column(name = "fecha_batalla")
 	private LocalDate fechaBatalla;
 
 	private String youtubeVideo;
