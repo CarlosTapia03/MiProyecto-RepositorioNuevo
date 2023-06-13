@@ -52,7 +52,6 @@ public class Batalla {
 	@Column(name = "fechaBatalla")
 	private LocalDate fechaBatalla;
 
-	@NotNull(message = "No debe ser un valor nulo")
 	private String youtubeVideo;
 
 	private String rutaPortada;

@@ -50,7 +50,12 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+	<header>
+			<div th:insert="top::top"></div>
+	</header>
+	
 	<div class="container">
+	
 		<br>
 		<h2>Registro de batalla</h2>
 		<br>
@@ -59,43 +64,54 @@
 				<label for="nombre" class="form-label">Nombre: </label>
 				<input type="text" id="nombre" placeholder="Digita el nombre" class="form-control"
 					th:field="*{nombre}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="{nombre}"></div>
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 			</div>
 
 			<div class="mb-3">
 				<label for="descripcion" class="form-label">Descripcion: </label>
-				<input type="text" id="descripcion" placeholder="Digita la descripcion" class="form-control"
-					th:field="*{descripcion}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="{descripcion}">
+				<textarea id="descripcion" placeholder="Digita la descripcion" class="form-control"
+					th:field="*{descripcion}"></textarea>
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">
 				</div>
 			</div>
 
 			<div class="mb-3">
 				<label for="fechaBatalla" class="form-label">Fecha de la batalla: </label>
-				<input type="text" id="fechaBatalla" placeholder="Digita la fecha" class="form-control"
+				<input type="date" id="fechaBatalla" placeholder="Digita la fecha" class="form-control"
 					th:field="*{fechaBatalla}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('fechaBatalla')}" th:errors="{fechaBatalla}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('fechaBatalla')}" th:errors="*{fechaBatalla}">
 				</div>
 			</div>
 
 			<div class="mb-3">
-				<label for="youtubeVideo" class="form-label">Youtube video: </label>
+				<label for="youtubeVideo" class="form-label">Youtube video id: </label>
 				<input type="text" id="youtubeVideo" placeholder="agrega el id del video" class="form-control"
 					th:field="*{youtubeVideo}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('youtubeVideo')}" th:errors="{youtubeVideo}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('youtubeVideo')}" th:errors="*{youtubeVideo}">
 				</div>
 			</div>
 
 			<div class="mb-3">
-				<label for="rutaPortada" class="form-label">Portada: </label>
-				<input type="file" name="portada" id="rutaPortada" class="form-control" th:field="*{rutaPortada}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('rutaPortada')}" th:errors="{rutaPortada}">
+				<label for="portada" class="form-label">Portada: </label>
+				<input type="file" name="portada" id="portada" class="form-control" th:field="*{portada}" />
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}"></div>
+			</div>
+
+			<div class="mb-3">
+				<label for="rondas" class="form-label">Ronda: </label>
+				<select id="rondas" class="form-control" th:field="*{rondas}">
+					<option th:each="ronda : ${rondas}" th:value="${ronda.id}" th:text="${ronda.titulo}"></option>
+				</select>
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('rondas')}" th:errors="*{rondas}">
 				</div>
+			</div>
+			<div class="text-end">
+				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</form>
 	</div>
 
- 
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
