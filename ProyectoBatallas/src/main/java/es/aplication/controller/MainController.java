@@ -36,29 +36,29 @@ public class MainController {
 	@Autowired
 	private BatallaServiceImpl batallaService;
 	
-public void crearTablas() {
-		
-		Juez j1 = new Juez("Kapo");
-		Juez j2 = new Juez("Piezas");
-		Juez j3 = new Juez("Aczino");
-		
-		Batalla b1 = new Batalla();
-		Batalla b2 = new Batalla();
-		
-		j3.getbatallas().add(b2);
-		j1.getbatallas().add(b1);
-		b2.setJuez(j1);
-		b1.setJuez(j3);
-		
-		juezService.insertarJuez(j1);
-		juezService.insertarJuez(j2);
-		juezService.insertarJuez(j3);
-		
-		batallaService.insertarBatalla(b1);
-		batallaService.insertarBatalla(b2);
-		
-		
-		batallaRepo.save(b1);
-		
-		}
+//public void crearTablas() {
+//		
+//		Juez j1 = new Juez("Kapo");
+//		Juez j2 = new Juez("Piezas");
+//		Juez j3 = new Juez("Aczino");
+//		
+//		Batalla b1 = new Batalla();
+//		Batalla b2 = new Batalla();
+//		
+//		j3.getbatallas().add(b2);
+//		j1.getbatallas().add(b1);
+//		b2.setJuez(j1);
+//		b1.setJuez(j3);
+//		
+//		juezService.insertarJuez(j1);
+//		juezService.insertarJuez(j2);
+//		juezService.insertarJuez(j3);
+//		
+//		batallaService.insertarBatalla(b1);
+//		batallaService.insertarBatalla(b2);
+//		
+//		
+//		batallaRepo.save(b1);
+//		
+//		}
 }
