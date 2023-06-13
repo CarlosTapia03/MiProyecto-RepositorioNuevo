@@ -1,75 +1,134 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votaciones de batallas</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-    <div th:insert="librerias::librerias"></div>
-    
-     <style>
-        body {
-            background-color: rgb(192, 192, 192);
-        }
-        .red-bull-blue {
-            color: #004B87;
-        }
-        .red-bull-red {
-            color: #CE0E2D;
-        }
-        .red-bull-bg {
-            background-color: #CE0E2D;
-        }
-        .red-bull-bg:hover {
-            background-color: #A00C22;
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Votaciones de batallas</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+	<div th:insert="librerias::librerias"></div>
+
+	<style>
+	
+		form .invalid-feedback {
+			display: block;
+		}
+	
+		body {
+			background-color: rgb(192, 192, 192);
+		}
+
+		.red-bull-blue {
+			color: #004B87;
+		}
+
+		.red-bull-red {
+			color: #CE0E2D;
+		}
+
+		.red-bull-bg {
+			background-color: #CE0E2D;
+		}
+
+		.red-bull-bg:hover {
+			background-color: #A00C22;
+		}
+	</style>
 </head>
+
 <body>
 
-<div class="container">
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 
-    <header>
-        <div th:insert="top::top"></div>
-    </header>
-    
-     <h1 class="mt-4 mb-4 red-bull-red">Votaciones de batallas</h1>
-    
-    <h2 class="mb-4 red-bull-blue">Batallas de Red Bull</h2>
-    
-    <p>Las batallas de Red Bull, también conocidas como Red Bull Batalla de los Gallos, son competencias de freestyle rap en español, organizadas por la marca de bebidas energéticas Red Bull. Estas competencias comenzaron en 2005 y se han convertido en uno de los eventos más importantes y populares en la escena del hip-hop en habla hispana.</p>
-    
-    <p>Los participantes compiten en duelos individuales, improvisando versos y rimas en función de palabras o temas propuestos por el presentador o el jurado. Las batallas se llevan a cabo en varias rondas, donde los competidores deben demostrar sus habilidades líricas, fluidez, capacidad de improvisación y creatividad.</p>
-    
-    <h3 class="mb-3 red-bull-red">Participantes destacados</h3>
-    
-    <ul>
-        <li>Arkano</li>
-        <li>Aczino</li>
-        <li>Chuty</li>
-        <li>Wos</li>
-        <li>Skone</li>
-        <li>Dtoke</li>
-    </ul>
-    
-    <h3 class="mb-3 red-bull-red">Eventos relevantes</h3>
-    
-    <ul>
-        <li>Red Bull Batalla de los Gallos Final Internacional 2020</li>
-        <li>Red Bull Batalla de los Gallos Final Nacional España 2019</li>
-        <li>Red Bull Batalla de los Gallos Final Nacional Argentina 2018</li>
-    </ul>
-    
-    
-</div>
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+	<div class="container">
+
+		<header>
+			<div th:insert="top::top"></div>
+		</header>
+
+		<h1 class="mt-4 mb-4 red-bull-red">Votaciones de batallas</h1>
+
+		<h2 class="mb-4 red-bull-blue">Batallas de Red Bull</h2>
+
+		<p>Las batallas de Red Bull, también conocidas como Red Bull Batalla de los Gallos, son competencias de
+			freestyle rap en español, organizadas por la marca de bebidas energéticas Red Bull. Estas competencias
+			comenzaron en 2005 y se han convertido en uno de los eventos más importantes y populares en la escena del
+			hip-hop en habla hispana.</p>
+
+		<p>Los participantes compiten en duelos individuales, improvisando versos y rimas en función de palabras o temas
+			propuestos por el presentador o el jurado. Las batallas se llevan a cabo en varias rondas, donde los
+			competidores deben demostrar sus habilidades líricas, fluidez, capacidad de improvisación y creatividad.</p>
+
+		<h3 class="mb-3 red-bull-red">Participantes destacados</h3>
+
+		<ul>
+			<li>Arkano</li>
+			<li>Aczino</li>
+			<li>Chuty</li>
+			<li>Wos</li>
+			<li>Skone</li>
+			<li>Dtoke</li>
+		</ul>
+
+		<h3 class="mb-3 red-bull-red">Eventos relevantes</h3>
+
+		<ul>
+			<li>Red Bull Batalla de los Gallos Final Internacional 2020</li>
+			<li>Red Bull Batalla de los Gallos Final Nacional España 2019</li>
+			<li>Red Bull Batalla de los Gallos Final Nacional Argentina 2018</li>
+		</ul>
+
+		<br>
+
+		<h2>Batallas</h2>
+
+		<div class="text-end">
+			<a href="/admin/batallas/nuevo" class="btn btn-primary mb-3">
+				Agregar batalla
+			</a>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Batalla</th>
+					<th>Fecha batalla</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="batalla : ${batallas}" th:object="${batalla}">
+					<td></td>
+					<td>
+						<div th:text="*{nombre}" class="fs-5 fw-bold"></div>
+						<p th:text="*{descripcion}"></p>
+						<div>
+							<span class="badge rounded-pill bg-light text-dark me-1" th:each="ronda: ${rondas}"
+							 th:text="${ronda.titulo}"></span>
+						</div>
+					</td>
+					<td th:text="*{#temporals.format(fechaBatalla, 'dd/MM/yyyy')}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>

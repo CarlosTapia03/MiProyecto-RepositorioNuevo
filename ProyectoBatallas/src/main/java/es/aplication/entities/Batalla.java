@@ -40,8 +40,8 @@ public class Batalla {
 	private Long id;
 
 	@NotNull(message = "No debe ser un valor nulo")
-	@Column(name = "titulo")
-	private String titulo;
+	@Column(name = "nombre")
+	private String nombre;
 
 	@NotNull(message = "No debe ser un valor nulo")
 	@Column(name = "descripcion")
