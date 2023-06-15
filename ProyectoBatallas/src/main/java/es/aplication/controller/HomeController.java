@@ -36,8 +36,7 @@ public class HomeController {
 
 	@GetMapping("")
 	public ModelAndView verPaginaDeInicio() {
-		List<Batalla> batallasMasVistas = batallasRepo
-				.findAll(PageRequest.of(0, 4, Sort.by("fechaBatalla").descending())).toList();
+		List<Batalla> batallasMasVistas = batallasRepo.findAll();
 		return new ModelAndView("index").addObject("batallasMasVistas", batallasMasVistas);
 	}
 
