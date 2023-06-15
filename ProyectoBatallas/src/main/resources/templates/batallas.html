@@ -1,106 +1,45 @@
 <!DOCTYPE html>
-<head th:insert="librerias::librerias">
-
-<script>
-    $('#modal-delete').on('show.bs.modal', function (e) {
-        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-        $('#modal-deleteHiddenId').val($(this).find('.btn-ok').attr('href'));
-    });
-</script>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{master.html}">
+<head>
+<meta charset="utf-8">
+<title th:inline="text">Batallas</title>
 </head>
 <body>
 
-<div class="container">
+	<div layout:fragment="content">
+		<h4>Todas las batallas</h4>
 
-<header>
-
-<div th:insert="top::top"></div>
-
-</header>
-
-<h1>Batallas en Spring </h1>
-
-<!-- Imprimir tabla batallas -->
-
-<table class="table table-hover">
-<thead class = "table-dark bg-info text-white">
-<tr>
-<th>Id </th>
-<th>Nombre Juez</th>
-</tr>
-</thead>
-<tbody>
-
-	<tr th:if="${listabatallas.empty}">
-		<td colspan="2"> No hay batallas</td>
-	</tr>
-	<tr th:each="batalla:${listabatallas}">
-	<td>
-		<a th:href="@{/batallas/{id}(id=${batalla.id})}" class="btn btn-primary btn-sm">
-			<span th:text="${batalla.id}"> </span>
-		</a>
-	</td>
-	<td>
-		<span th:text="${batalla.juez.getNombre()}"> </span>
-	</td>
-		
-	</tr>
-</tbody>
-</table>
-
-<div class="p-5">
-<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#crearMensaje">
-+</button>
-</div>
-
-<!-- create modal -->
-	
-	<div class="modal fade" th:id="crearMensaje" tabindex="1" role="dialog">
-	<div class="modal-dialog" role="document">
-	<div class="modal-content">
-	<div class="modal-header">
-		<h4 class="modal-title" id="exampleModelLabel">Crear Batalla</h4>
-		<button class="close btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">
-		<span aria-hidden="true">x</span>
-		</button>
+		<div class="row">
+			<div class="row">
+				<div class="col-md-3 my-5" th:each="batalla : ${batallas}"
+					th:object="${batallas}">
+					<a th:href="@{/batallas/{id}(id=*{id})}" class="card shadow-lg"
+						style="text-decoration: none;"> <img
+						th:src="@{/assets/{filename}(filename=*{rutaPortada})}"
+						th:alt="*{titulo}" class="card-img-top">
+						<div class="card-body">
+							<h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+							<p th:text="*{#temporals.format(fechaBatalla,'dd/MM/yyyy')}"
+								class="text-muted small"></p>
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row mt-5" th:with="page=${batallas}">
+				<div class="col-sm-6">
+					<div sd:pagination-sumary></div>
+					<div class="col-sm-6">
+						<nav>
+							<ul class="pagination" sd:pagination="full"></ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="modal-body">
-	<p class="error-text">Crear batalla nueva: </p>
-	
-	 <!--formulario nombre a editar-->
-	<form action="#" th:action="@{/batallas/add/}" th:object="${batallaNueva}" method="post">
-	 
-	 <div class="form-row">
-	 
-	 <div class="form-group mt-4">
-	 <label for="texto">Seleccionar Juez</label>
-	 
-	 <select th:field="*{juez.id}" class="form-control" id="exampleFormControlSelect1">
-	 <option th:each="juez:${listaJueces}" th:value="${juez.id}" th:text="${juez.nombre}" value="">Seleccionar jueces
-	 </option>
-	 
-	 </select>
-	 
-	 
-	 </div>
-	 
-	 </div>
-	 
-	 </div>
-	 <div class="modal-footer">
-	 <button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-	 <input type="submit" value="Crear Batalla" class="btn btn-primary float-right"/>
-	 </div>
-	
-	</form>
-	
-	</div>
-	</div>
-	</div>
-	
-	<!-- fin create modal -->
 
-</div>
 
-</div>
 </body>
+</html>

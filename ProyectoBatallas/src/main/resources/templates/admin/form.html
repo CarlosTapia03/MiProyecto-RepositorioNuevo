@@ -1,88 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymelaf/layout">
-
+<html lang="es"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<title>Registro de batallas</title>
-
-	<div th:insert="librerias::librerias"></div>
-
+<meta charset="utf-8">
 </head>
-
 <body>
-
-	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
-
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-	<header>
-		<div th:insert="top::top"></div>
-	</header>
 
 	<div layout:fragment="form">
 		<br>
-		<br>
-		<form action="" method="post" th:object="${batalla}" enctype="multipart/form-data">
+		<form action="" method="post" th:object="${batalla}"
+			enctype="multipart/form-data">
 			<div class="mb-3">
-				<label for="nombre" class="form-label">Nombre: </label>
-				<input type="text" id="nombre" placeholder="Digita el nombre" class="form-control"
-					th:field="*{nombre}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+				<label for="titulo" class="form-label">Titulo : </label> <input
+					type="text" id="titulo" placeholder="Digite el titulo"
+					class="form-control" th:field="*{titulo}">
+				<div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}"
+					th:errors="*{titulo}"></div>
 			</div>
 
 			<div class="mb-3">
-				<label for="descripcion" class="form-label">Descripcion: </label>
-				<textarea id="descripcion" placeholder="Digita la descripcion" class="form-control"
-					th:field="*{descripcion}"></textarea>
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}">
-				</div>
+				<label for="descripcion" class="form-label">Descripcion : </label>
+				<textarea id="descripcion" placeholder="Digite la descripcion"
+					class="form-control" th:field="*{descripcion}"></textarea>
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 			</div>
 
 			<div class="mb-3">
-				<label for="fechaBatalla" class="form-label">Fecha de la batalla: </label>
-				<input type="date" id="fechaBatalla" placeholder="Digita la fecha" class="form-control"
-					th:field="*{fechaBatalla}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('fechaBatalla')}" th:errors="*{fechaBatalla}">
-				</div>
+				<label for="fechaBatalla" class="form-label">Fecha de
+					la batalla : </label> <input type="date" id="fechaBatalla"
+					placeholder="Digite la fecha de la batalla" class="form-control"
+					th:field="*{fechaBatalla}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('fechaBatalla')}"
+					th:errors="*{fechaBatalla}"></div>
 			</div>
-
 			<div class="mb-3">
-				<label for="youtubeVideo" class="form-label">Youtube video id: </label>
-				<input type="text" id="youtubeVideo" placeholder="agrega el id del video" class="form-control"
-					th:field="*{youtubeVideo}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('youtubeVideo')}" th:errors="*{youtubeVideo}">
-				</div>
+				<label for="youtubeTrailerId" class="form-label">Youtube
+					Trailer ID : </label> <input type="text" id="youtubeTrailerId"
+					placeholder="Digite el Youtube Trailer ID" class="form-control"
+					th:field="*{youtubeTrailerId}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('youtubeTrailerId')}"
+					th:errors="*{youtubeTrailerId}"></div>
 			</div>
-
 			<div class="mb-3">
-				<label for="portada" class="form-label">Portada: </label>
-				<input type="file" name="portada" id="portada" class="form-control" th:field="*{portada}" />
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}"></div>
+				<label for="portada" class="form-label">Portada : </label> <input
+					type="file" name="portada" id="portad" class="form-control"
+					th:field="*{portada}">
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('portada')}" th:errors="*{portada}"></div>
 			</div>
-
 			<div class="mb-3">
-				<label for="rondas" class="form-label">Ronda: </label>
-				<select id="rondas" class="form-control" th:field="*{rondas}">
-					<option th:each="ronda : ${rondas}" th:value="${ronda.id}" th:text="${ronda.titulo}"></option>
+				<label for="rondas" class="form-label">Ronda : </label> <select
+					id="rondas" class="form-control" th:field="*{rondas}" multiple>
+					<option th:each="ronda : ${rondas}" th:value="${ronda.id}"
+						th:text="${ronda.titulo}"></option>
 				</select>
-				<div class="invalid-feedback" th:if="${#fields.hasErrors('rondas')}" th:errors="*{rondas}">
-				</div>
+				<div class="invalid-feedback"
+					th:if="${#fields.hasErrors('rondas')}" th:errors="*{rondas}"></div>
 			</div>
+
 			<div class="text-end">
 				<button type="submit" class="btn btn-primary">Guardar</button>
 			</div>
 		</form>
 	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
-
 </html>

@@ -46,47 +46,19 @@
 
 		<br>
 
-		<h2>Batallas</h2>
-
-		<div class="text-end">
-			<a href="/admin/batallas/nuevo" class="btn btn-primary mb-3">
-				Agregar batalla
-			</a>
-		</div>
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Batalla</th>
-					<th>Fecha batalla</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="batalla : ${batallas}" th:object="${batalla}">
-					<td style="width:150px;">
-						<a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
-							<img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="img-thumbnail w-100"/>
-						</a>
-					</td>
-					<td>
-						<div th:text="*{nombre}" class="fs-5 fw-bold"></div>
-						<p th:text="*{descripcion}"></p>
-						<div>
-							<span class="badge rounded-pill bg-light text-dark me-1" th:each="ronda: *{rondas}"
-							 th:text="${ronda.titulo}"></span>
-						</div>
-					</td>
-					<td th:text="*{#temporals.format(fechaBatalla, 'dd/MM/yyyy')}"></td>
-					<td class="text-end">
-						<a th:href="@{/admin/batallas/{id}/editar(id=*{id})}">Editar</a>
-						<a href="javascript:void(0)" class="text-danger ms-3" th:onclick="'eliminarBatalla(' +{id} +')'">Eliminar</a>
-						<form th:id="'eliminarBatallaForm' + *{id}" th:action="@{/admin/batallas/{id}/eliminar(id =*{id})}" method="post" class="d-none">
-						</form>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<h4 class="text-danger mt-5">Mas vistos</h4>
+	
+	<div class="row">
+	    <div class="col-md-3 my-5" th:each="batalla : ${batallasMasVistas}" th:object="${batalla}">
+	       <a th:href="@{/batallas/{id}(id=*{id})}" class="card shadow-lg" style="text-decoration:none;">
+	       <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" th:alt="*{titulo}" class="card-img-top">
+	       <div class="card-body">
+	          <h2 class="card-title fs-6" th:text="*{titulo}"></h2>
+	          <p th:text="*{#temporals.format(fechaBatalla,'dd/MM/yyyy')}" class="text-muted small"></p>
+	       </div>
+	       </a>
+	    </div>
+	</div>
 	</div>
 	
 	<div layout:fragment="scripts">

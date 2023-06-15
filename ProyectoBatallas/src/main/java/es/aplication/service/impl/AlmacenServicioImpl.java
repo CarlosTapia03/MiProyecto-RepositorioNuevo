@@ -22,96 +22,67 @@ import es.aplication.exceptions.FileNotFoundException;
 import es.aplication.service.interfaces.AlmacenServicio;
 
 @Service
-public class AlmacenServicioImpl implements AlmacenServicio {
+public class AlmacenServicioImpl implements AlmacenServicio{
 
 	@Value("${storage.location}")
 	private String storageLocation;
-
-	// Sirve para indicar que este metodo se va a ejecutar cada vez que haya una
-	// nueva instancia de esta clase
-	@PostConstruct
+	
+	//esta sirve para indicar que este metodo se va a ejecutar cada vez que halla una nueva instancia de esta esta clase
+	@PostConstruct 
 	@Override
 	public void iniciarAlmacenDeArchivos() {
-		// TODO Auto-generated method stub
-		
 		try {
-			
 			Files.createDirectories(Paths.get(storageLocation));
-		
-		} catch (IOException exception) {
-			
+		}catch (IOException excepcion) {
 			throw new AlmacenExcepcion("Error al inicializar la ubicación en el almacen de archivos");
 		}
 	}
 
 	@Override
 	public String almacenarArchivo(MultipartFile archivo) {
-		// TODO Auto-generated method stub
-		
 		String nombreArchivo = archivo.getOriginalFilename();
-		
-		if (archivo.isEmpty()) {
-			
+		if(archivo.isEmpty()) {
 			throw new AlmacenExcepcion("No se puede almacenar un archivo vacio");
 		}
 		try {
-			InputStream inputStream = archivo.getInputStream();
-			
-			Files.copy(inputStream, Paths.get(storageLocation).resolve(nombreArchivo),
-					StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException exception) {
-			
-			throw new AlmacenExcepcion("Error al almacenar el archivo " + nombreArchivo, exception);
+			InputStream inputStream  = archivo.getInputStream();
+			Files.copy(inputStream,Paths.get(storageLocation).resolve(nombreArchivo),StandardCopyOption.REPLACE_EXISTING);
+		}catch (IOException excepcion) {
+			throw new AlmacenExcepcion("Error al almacenar el archivo " + nombreArchivo,excepcion);
 		}
-		
 		return nombreArchivo;
 	}
 
 	@Override
 	public Path cargarArchivo(String nombreArchivo) {
-		// TODO Auto-generated method stub
-
 		return Paths.get(storageLocation).resolve(nombreArchivo);
 	}
 
 	@Override
 	public Resource cargarComoRecurso(String nombreArchivo) {
-		
 		try {
-			
 			Path archivo = cargarArchivo(nombreArchivo);
-			
 			Resource recurso = new UrlResource(archivo.toUri());
-
-			if (recurso.exists() || recurso.isReadable()) {
-				
+			
+			if(recurso.exists() || recurso.isReadable()) {
 				return recurso;
-				
-			} else {
-				
+			}else {
 				throw new FileNotFoundException("No se pudo encontrar el archivo " + nombreArchivo);
 			}
-
-		} catch (MalformedURLException exception) {
-			
-			throw new FileNotFoundException("No se pudo encontrar el archivo " + nombreArchivo, exception);
+		
+		}catch (MalformedURLException excepcion) {
+			throw new FileNotFoundException("No se pudo encontrar el archivo " + nombreArchivo,excepcion);
 		}
 	}
 
 	@Override
 	public void eliminarArchivo(String nombreArchivo) {
-
 		Path archivo = cargarArchivo(nombreArchivo);
-		
 		try {
-			
 			FileSystemUtils.deleteRecursively(archivo);
-			
-		} catch (Exception exception) {
-			
-			System.out.println(exception);
+		}catch (Exception excepcion) {
+			System.out.println(excepcion);
 		}
-
 	}
 
 }

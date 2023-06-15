@@ -20,7 +20,7 @@ import es.aplication.entities.Batalla;
 import es.aplication.entities.Ronda;
 import es.aplication.persistence.BatallasRepo;
 import es.aplication.persistence.RondaRepo;
-import es.aplication.service.interfaces.AlmacenServicio;
+import es.aplication.service.impl.AlmacenServicioImpl;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,74 +33,75 @@ public class AdminController {
 	private RondaRepo rondaRepo;
 
 	@Autowired
-	private AlmacenServicio servicio;
-	
-	
+	private AlmacenServicioImpl servicio;
 
-	@GetMapping("/")
-	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "nombre", size = 5) Pageable pageable) {
-	    Page<Batalla> batallas = batallasRepo.findAll(pageable);
-
-	    return new ModelAndView("/admin/index").addObject("batallas", batallas);
+	
+	@GetMapping("")
+	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo", size = 5) Pageable pageable) {
+		Page<Batalla> batallas = batallasRepo.findAll(pageable);
+		return new ModelAndView("admin/index").addObject("batallas", batallas);
 	}
-
 
 	@GetMapping("/batallas/nuevo")
 	public ModelAndView mostrarFormularioDeNuevaBatalla() {
 		List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
-		return new ModelAndView("admin/nueva-batalla").addObject("batalla", new Batalla()).addObject("rondas", rondas);
+		return new ModelAndView("admin/nueva-batalla")
+				.addObject("batalla", new Batalla())
+				.addObject("rondas",rondas);
 	}
-
+	
 	@PostMapping("/batallas/nuevo")
-	public ModelAndView registrarBatalla(@Validated Batalla batalla, BindingResult bindingResult) {
-		if (bindingResult.hasErrors() || batalla.getPortada() == null || batalla.getPortada().isEmpty()) {
-		    if (batalla.getPortada() == null || batalla.getPortada().isEmpty()) {
-		        bindingResult.rejectValue("portada", "MultipartNotEmpty");
-		    }
+	public ModelAndView registrarBatalla(@Validated Batalla batalla,BindingResult bindingResult) {
+		if(bindingResult.hasErrors() || batalla.getPortada().isEmpty()) {
+			if(batalla.getPortada().isEmpty()) {
+				bindingResult.rejectValue("portada","MultipartNotEmpty");
+			}
+			
 			List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
 			return new ModelAndView("admin/nueva-batalla")
-					.addObject("batalla", batalla)
-					.addObject("rondas", rondas);
+					.addObject("batalla",batalla)
+					.addObject("rondas",rondas);
 		}
+		
 		String rutaPortada = servicio.almacenarArchivo(batalla.getPortada());
 		batalla.setRutaPortada(rutaPortada);
-
+		
 		batallasRepo.save(batalla);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/admin");
 	}
 	
 	@GetMapping("/batallas/{id}/editar")
-	public ModelAndView mostrarFormularioDeEditarBatalla(@PathVariable Integer id) {
+	public ModelAndView mostrarFormilarioDeEditarBatalla(@PathVariable Integer id) {
 		Batalla batalla = batallasRepo.getOne(id);
 		List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
 		
 		return new ModelAndView("admin/editar-batalla")
-				.addObject("batalla", batalla)
-				.addObject("rondas", rondas);
+				.addObject("batalla",batalla)
+				.addObject("rondas",rondas);
 	}
 	
 	@PostMapping("/batallas/{id}/editar")
-	public ModelAndView actualizarBatalla(@PathVariable Integer id,@Validated Batalla batalla, BindingResult bindingResult) {
-		List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
-		
-		if (bindingResult.hasErrors()) {
+	public ModelAndView actualizarBatalla(@PathVariable Integer id,@Validated Batalla batalla,BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
 			return new ModelAndView("admin/editar-batalla")
-					.addObject("batalla", batalla)
-					.addObject("rondas", rondas);
+					.addObject("batalla",batalla)
+					.addObject("rondas",rondas);
 		}
 		
 		Batalla batallaDB = batallasRepo.getOne(id);
-		batallaDB.setNombre(batalla.getNombre());
+		batallaDB.setTitulo(batalla.getTitulo());
 		batallaDB.setDescripcion(batalla.getDescripcion());
 		batallaDB.setFechaBatalla(batalla.getFechaBatalla());
-		batallaDB.setYoutubeVideo(batalla.getYoutubeVideo());
+		batallaDB.setYoutubeTrailerId(batalla.getYoutubeTrailerId());
 		batallaDB.setRondas(batalla.getRondas());
 		
-		if (!batalla.getPortada().isEmpty()) {
+		if(!batalla.getPortada().isEmpty()) {
 			servicio.eliminarArchivo(batallaDB.getRutaPortada());
-			String rutaPortada = servicio.almacenarArchivo(batalla.getPortada());
+			String rutaPortada = servicio.almacenarArchivo(batallaDB.getPortada());
 			batallaDB.setRutaPortada(rutaPortada);
 		}
+		
 		batallasRepo.save(batallaDB);
 		return new ModelAndView("redirect:/admin");
 	}
@@ -110,7 +111,7 @@ public class AdminController {
 		Batalla batalla = batallasRepo.getOne(id);
 		batallasRepo.delete(batalla);
 		servicio.eliminarArchivo(batalla.getRutaPortada());
-
+		
 		return "redirect:/admin";
 	}
 }
