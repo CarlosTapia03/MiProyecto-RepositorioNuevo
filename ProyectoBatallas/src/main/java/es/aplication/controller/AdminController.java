@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -57,12 +58,59 @@ public class AdminController {
 		        bindingResult.rejectValue("portada", "MultipartNotEmpty");
 		    }
 			List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
-			return new ModelAndView("admin/nueva-batalla").addObject("batalla", batalla).addObject("rondas", rondas);
+			return new ModelAndView("admin/nueva-batalla")
+					.addObject("batalla", batalla)
+					.addObject("rondas", rondas);
 		}
 		String rutaPortada = servicio.almacenarArchivo(batalla.getPortada());
 		batalla.setRutaPortada(rutaPortada);
 
 		batallasRepo.save(batalla);
 		return new ModelAndView("redirect:/");
+	}
+	
+	@GetMapping("/batallas/{id}/editar")
+	public ModelAndView mostrarFormularioDeEditarBatalla(@PathVariable Integer id) {
+		Batalla batalla = batallasRepo.getOne(id);
+		List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
+		
+		return new ModelAndView("admin/editar-batalla")
+				.addObject("batalla", batalla)
+				.addObject("rondas", rondas);
+	}
+	
+	@PostMapping("/batallas/{id}/editar")
+	public ModelAndView actualizarBatalla(@PathVariable Integer id,@Validated Batalla batalla, BindingResult bindingResult) {
+		List<Ronda> rondas = rondaRepo.findAll(Sort.by("titulo"));
+		
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView("admin/editar-batalla")
+					.addObject("batalla", batalla)
+					.addObject("rondas", rondas);
+		}
+		
+		Batalla batallaDB = batallasRepo.getOne(id);
+		batallaDB.setNombre(batalla.getNombre());
+		batallaDB.setDescripcion(batalla.getDescripcion());
+		batallaDB.setFechaBatalla(batalla.getFechaBatalla());
+		batallaDB.setYoutubeVideo(batalla.getYoutubeVideo());
+		batallaDB.setRondas(batalla.getRondas());
+		
+		if (!batalla.getPortada().isEmpty()) {
+			servicio.eliminarArchivo(batallaDB.getRutaPortada());
+			String rutaPortada = servicio.almacenarArchivo(batalla.getPortada());
+			batallaDB.setRutaPortada(rutaPortada);
+		}
+		batallasRepo.save(batallaDB);
+		return new ModelAndView("redirect:/admin");
+	}
+	
+	@PostMapping("/batallas/{id}/eliminar")
+	public String eliminarBatalla(@PathVariable Integer id) {
+		Batalla batalla = batallasRepo.getOne(id);
+		batallasRepo.delete(batalla);
+		servicio.eliminarArchivo(batalla.getRutaPortada());
+
+		return "redirect:/admin";
 	}
 }

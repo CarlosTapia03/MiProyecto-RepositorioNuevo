@@ -13,7 +13,7 @@
 <body>
 
 	<div layout:fragment="content">
-		<h1 class="mt-4 mb-4 red-bull-red">Votaciones de batallas</h1>
+	<h1 class="mt-4 mb-4 red-bull-red">Votaciones de batallas</h1>
 
 		<h2 class="mb-4 red-bull-blue">Batallas de Red Bull</h2>
 
@@ -79,16 +79,28 @@
 						</div>
 					</td>
 					<td th:text="*{#temporals.format(fechaBatalla, 'dd/MM/yyyy')}"></td>
+					<td class="text-end">
+						<a th:href="@{/admin/batallas/{id}/editar(id=*{id})}">Editar</a>
+						<a href="javascript:void(0)" class="text-danger ms-3" th:onclick="'eliminarBatalla(' +{id} +')'">Eliminar</a>
+						<form th:id="'eliminarBatallaForm' + *{id}" th:action="@{/admin/batallas/{id}/eliminar(id =*{id})}" method="post" class="d-none">
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+	
+	<div layout:fragment="scripts">
+		<script>
+			function eliminarBatalla(id){
+				if(!confirm('¿Estás seguro de eliminar esta batalla?')) {
+					return;
+				}
+				$('#eliminarBatallaForm' + id).submit();
+			}
+		</script>
+	</div>
+	
 </body>
 
 </html>
