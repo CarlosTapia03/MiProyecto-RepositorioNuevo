@@ -35,18 +35,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-5">
-							<div class="card">
-								<div class="card-header text-dark bg-light">Batallas del juez:
-								</div>
-								<div class="card-body">
-								<span th:each="batalla: ${juezMostrar.batallas}">
-								<p><a th:text="${batalla.id}" th:href="@{/batallas/{id}(id=${batalla.id})}" class="card-text">ID</a></p>
-								</span>
-								
-							</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 

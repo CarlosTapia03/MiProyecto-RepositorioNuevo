@@ -37,10 +37,11 @@ public class AdminController {
 
 	
 	@GetMapping("")
-	public ModelAndView verPaginaDeInicio(@PageableDefault(sort = "titulo", size = 5) Pageable pageable) {
-		Page<Batalla> batallas = batallasRepo.findAll(pageable);
-		return new ModelAndView("admin/index").addObject("batallas", batallas);
+	public ModelAndView verPaginaDeInicio() {
+	    List<Batalla> batallas = batallasRepo.findAll();
+	    return new ModelAndView("admin/index").addObject("batallas", batallas);
 	}
+
 
 	@GetMapping("/batallas/nuevo")
 	public ModelAndView mostrarFormularioDeNuevaBatalla() {

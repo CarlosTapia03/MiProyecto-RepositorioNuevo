@@ -41,11 +41,11 @@ public class HomeController {
 	}
 
 	@GetMapping("/batallas-list")
-	public ModelAndView listarBatallas(
-			@PageableDefault(sort = "fechaBatalla", direction = Sort.Direction.DESC) Pageable pageable) {
-		Page<Batalla> batallas = batallasRepo.findAll(pageable);
-		return new ModelAndView("batallas").addObject("batallas", batallas);
+	public ModelAndView listarBatallas() {
+	    List<Batalla> batallas = batallasRepo.findAll();
+	    return new ModelAndView("batallas").addObject("batallas", batallas);
 	}
+
 
 	@GetMapping("/detalles-pelicula/{id}")
 	public ModelAndView mostrarDetallesDePelicula(@PathVariable Integer id) {
