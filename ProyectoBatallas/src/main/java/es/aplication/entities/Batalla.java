@@ -51,9 +51,11 @@ public class Batalla {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "fecha_batalla")
 	private LocalDate fechaBatalla;
-
+	
+	@Column(name = "youtube_video")
 	private String youtubeVideo;
 
+	@Column(name = "ruta_portada")
 	private String rutaPortada;
 
 	@NotEmpty

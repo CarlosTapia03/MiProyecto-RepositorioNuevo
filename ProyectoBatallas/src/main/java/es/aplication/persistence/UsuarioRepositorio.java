@@ -1,12 +1,14 @@
 package es.aplication.persistence;
 
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import es.aplication.entities.Usuario;
 
-public interface UsuarioRepo extends JpaRepository<Usuario, Integer> {
+@Repository
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
 
-	public Optional<Usuario> findByUsername(String username);
+	public Usuario findByEmail(String email);
+	
 }

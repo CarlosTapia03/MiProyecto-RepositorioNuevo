@@ -1,45 +1,30 @@
 package es.aplication.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
-@Table(name="rol")
+@Table(name = "rol")
 public class Rol {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
-	
-	@Column(name="nombre", unique = true)
+	private Long id;
 	private String nombre;
-	
-	@ManyToMany(mappedBy="roles", fetch = FetchType.EAGER)
-	private Set<Usuario> usuarios;
-	
-	public Rol(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	public Rol() {
-		usuarios = new HashSet<Usuario>();
-	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -51,11 +36,20 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
+	public Rol(Long id, String nombre) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
 	}
 
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-}
+	public Rol() {
+		
+	}
+
+	public Rol(String nombre) {
+		super();
+		this.nombre = nombre;
+	}
+
+	
 }

@@ -1,28 +1,43 @@
 package es.aplication.controller.dto;
 
-public class UsuarioDTO {
+public class UsuarioRegistroDTO {
 
-	private String username;
+	private Long id;
 	private String nombre;
+	private String apellido;
+	private String email;
 	private String password;
-	
-	public UsuarioDTO() {
-		
+
+	public Long getId() {
+		return id;
 	}
-	
-	public UsuarioDTO(String username, String nombre, String password) {
-		super();
-		this.username = username;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
-		this.password = password;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -33,16 +48,17 @@ public class UsuarioDTO {
 		this.password = password;
 	}
 
-	public String getNombre() {
-		return nombre;
+
+	public UsuarioRegistroDTO(String nombre, String apellido, String email, String password) {
+		super();
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public UsuarioRegistroDTO() {
+
 	}
-	
-	
-	
-	
-	
+
 }
