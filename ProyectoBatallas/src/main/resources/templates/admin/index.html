@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{master.html}">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{master.html}">
+
 <head>
-<meta charset="utf-8">
-<title>Administrar Batallas</title>
+	<meta charset="utf-8">
+	<title>Administrar Batallas</title>
 </head>
+
 <body>
 
-  <div layout:fragment="content">
+	<div layout:fragment="content">
 		<h2>Batallas</h2>
 		<div class="text-end">
 			<a href="/admin/batallas/nuevo" class="btn btn-primary mb-3">
@@ -26,52 +27,55 @@
 			<tbody>
 				<tr th:each="batalla : ${batallas}" th:object="${batalla}">
 					<td style="width:150px;">
-					   <a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
-					      <img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt="" class="img-thumbnail w-100">
-					   </a>
+						<a th:href="@{/assets/{filename}(filename=*{rutaPortada})}" data-fancybox>
+							<img th:src="@{/assets/{filename}(filename=*{rutaPortada})}" alt=""
+								class="img-thumbnail w-100">
+						</a>
 					</td>
 					<td>
 						<div th:text="*{titulo}" class="fs-5 fw-bold"></div>
 						<p th:text="*{descripcion}"></p>
 						<div>
-							<span class="badge rounded-pill bg-light text-dark me-1"
-								th:each="ronda : *{rondas}" th:text="${ronda.titulo}">
+							<span class="badge rounded-pill bg-light text-dark me-1" th:each="ronda : *{rondas}"
+								th:text="${ronda.titulo}">
 							</span>
 						</div>
 					</td>
 					<td th:text="*{#temporals.format(fechaBatalla,'dd/MM/yyyy')}"></td>
 					<td class="text-end">
-					   <a th:href="@{/admin/batallas/{id}/editar(id=*{id})}">Editar</a>
-					   <a href="javascript:void(0)" class="text-danger ms-3" th:onclick="'eliminarBatalla(' + *{id} +')'">Eliminar</a>
-					   <form th:id="'eliminarBatallaForm' + *{id}" th:action="@{/admin/batallas/{id}/eliminar(id=*{id})}" method="post" class="d-none">
-					   </form>
+						<a th:href="@{/admin/batallas/{id}/editar(id=*{id})}">Editar</a>
+						<a href="javascript:void(0)" class="text-danger ms-3"
+							th:onclick="'eliminarBatalla(' + *{id} +')'">Eliminar</a>
+						<form th:id="'eliminarBatallaForm' + *{id}"
+							th:action="@{/admin/batallas/{id}/eliminar(id=*{id})}" method="post" class="d-none">
+						</form>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<div class="row mt-5" th:with="page=${batallas}">
-		   <div class="col-sm-6">
-		      <div sd:pagination-sumary>
-		      </div>
-		      <div class="col-sm-6">
-		         <nav>
-		            <ul class="pagination" sd:pagination="full"></ul>
-		         </nav>
-		      </div>
-		   </div>
+			<div class="col-sm-6">
+				<div th:pagination-summary></div>
+				<div class="col-sm-6">
+					<nav>
+						<ul class="pagination" th:pagination="full"></ul>
+					</nav>
+				</div>
+			</div>
 		</div>
-  </div> 
-  
-  <div layout:fragment="scripts">
-      <script>
-         function eliminarBatalla(id){
-        	 if(!confirm('¿Estás seguro de eliminar esta batalla?')){
-        		 return;
-        	 }
-        	 $('#eliminarBatallaForm' + id).submit();
-         }
-      </script>
-  </div>
-	
+	</div>
+
+	<div layout:fragment="scripts">
+		<script>
+			function eliminarBatalla(id) {
+				if (!confirm('¿Estás seguro de eliminar esta batalla?')) {
+					return;
+				}
+				$('#eliminarBatallaForm' + id).submit();
+			}
+		</script>
+	</div>
+
 </body>
+
 </html>

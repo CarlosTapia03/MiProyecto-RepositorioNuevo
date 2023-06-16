@@ -39,7 +39,7 @@ public class JuezServiceImpl implements JuezService {
 
 	public Juez buscarJuezPorIdJPA(Integer id) {
 		
-		return juezRepo.findById(id).orElse(null);
+		return juezRepo.findById(id).get();
 	}
 
 }

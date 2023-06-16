@@ -11,9 +11,9 @@
 
  			 <class>aplication.model.Juez</class>
   			 <class>aplication.model.Batalla</class>
-             <class>aplication.model.Freestyler</class>
              <class>aplication.modelo.Usuario</class>
              <class>aplication.model.Rol</class>
+             <class>aplication.model.Ronda</class>
         <properties>
              
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
